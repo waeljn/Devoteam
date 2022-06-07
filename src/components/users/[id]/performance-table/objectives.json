@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "name": "Create a login form",
+    "weight": 0.10,
+    "n1": "You are too lazy",
+    "n": "It is the colleague fault" 
+  },
+  {
+    "id": "2",
+    "name": "Create a login API",
+    "weight": 0.20,
+    "n1": "This is good job",
+    "n": "I am always good"
+  },
+  {
+    "id": "3",
+    "name": "Create the users database table",
+    "weight": 0.45,
+    "n1": "You must store the users emails",
+    "n": "I am working on it"
+  },
+  {
+    "id": "4",
+    "name": "Create the projects database table",
+    "weight": 0.25,
+    "n1": "You must store the users emails",
+    "n": "I am working on it"
+  }
+]

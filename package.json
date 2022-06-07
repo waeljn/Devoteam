@@ -1,0 +1,27 @@
+{
+  "name": "devoteam",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
+    "start": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "axios": "0.26.0",
+    "core-js": "3.21.1",
+    "firebase": "9.6.11",
+    "vue": "2.6.11",
+    "vue-json-excel": "0.3.0",
+    "vue-router": "3.1.6",
+    "vuejs-datatable": "2.0.0-alpha.7"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "4.3.0",
+    "@vue/cli-service": "4.3.0",
+    "prettier": "1.19.1",
+    "vue-template-compiler": "2.6.11"
+  }
+}
