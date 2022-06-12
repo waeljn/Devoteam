@@ -77,9 +77,10 @@ export default {
       this.error = null
       this.loading = true
       try {
-        const { data } = await getTodos()
-        this.todos = data
-        this.count = data.length
+        const snap = await getTodos()
+        snap.forEach((doc)=>{
+          this.todos.push({...doc.data(), id: doc.id})
+        })
         this.loading = false
       } catch (error) {
         this.error = error
