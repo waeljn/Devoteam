@@ -69,22 +69,25 @@ export default {
     }
   },
   mounted() {
-    this.fetchData()
+    this.fetchUsers()
   },
   methods: {
-    async fetchData() {
+     async fetchUsers() {
       this.users = []
       this.error = null
       this.loading = true
       try {
-        const { data } = await getUsers()
-        this.users = data
-        this.count = data.length
-        this.loading = false
+       const snap = await getUsers()
+          snap.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            this.users.push(doc.id, ' => ', doc.data())
+            this.loading = false
+          })
       } catch (error) {
-        this.error = error
+          this.error = error
         this.loading = false
         console.log(error)
+        
       }
     },
   },

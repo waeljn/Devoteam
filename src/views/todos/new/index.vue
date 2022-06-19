@@ -168,28 +168,31 @@ export default {
     async fetchTodos() {
       this.errorTodos = this.todos = null
       this.loadingTodos = true
-      try {
-        const { data } = await getTodos()
-        this.todos = data
-        this.loadingTodos = false
-      } catch (error) {
-        this.errorTodos = error
-        this.loadingTodos = false
-        console.log(error)
-      }
+        try {
+          const snap = await getTodos()
+          snap.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            this.todos.push(doc.id, ' => ', doc.data())
+             this.loadingTodos = false
+          })
+        } catch (error) {
+          this.loadingTodos = false
+          console.log(error)
+        }
     },
     async fetchData() {
       this.users = []
       this.error = null
       this.loading = true
       try {
-        const { data } = await getUsers()
-        this.users = data
-        this.count = data.length
-        this.loading = false
+       const snap = await getUsers()
+          snap.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            this.users.push(doc.id, ' => ', doc.data())
+            this.loading = false
+          })
       } catch (error) {
-        this.error = error
-        this.loading = false
+         this.loading = false
         console.log(error)
       }
     },

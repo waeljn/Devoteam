@@ -5,9 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">
-              User Details
-            </h1>
+            <h1 class="m-0">User Details</h1>
           </div>
           <!-- /.col -->
           <div class="col-sm-6">
@@ -93,16 +91,16 @@
 </template>
 
 <script>
-import UserDetails from '../../components/users/details'
-import UserPerformanceTable from '../../components/users/[id]/performance-table'
-import ProjectsTable from '../../components/projects/table'
-import UserCommentsDetails from '../../components/comments/details'
-import TodosTable from '../../components/todos/table'
-import TodosList from '../../components/todos/list'
-import { removeUserById, getUserById } from '../../domain/users'
-import { getProjectsByUserId } from '../../domain/projects'
-import { getTodosByUserId } from '../../domain/todos'
-import { getCommentsByUserId } from '../../domain/comments'
+import UserDetails from "../../components/users/details";
+import UserPerformanceTable from "../../components/users/[id]/performance-table";
+import ProjectsTable from "../../components/projects/table";
+import UserCommentsDetails from "../../components/comments/details";
+import TodosTable from "../../components/todos/table";
+import TodosList from "../../components/todos/list";
+import { removeUserById, getUserById } from "../../domain/users";
+import { getProjectsByUserId } from "../../domain/projects";
+import { getTodosByUserId } from "../../domain/todos";
+import { getCommentsByQuery } from "../../domain/comments";
 export default {
   components: {
     UserDetails,
@@ -124,131 +122,134 @@ export default {
       tab: null,
       // userComment: null, rajja3ha
       // managerComment: null, rajja3ha
-      userComment: 'Test user comment',
-      managerComment: 'Test manager comment',
+      userComment: "Test user comment",
+      managerComment: "Test manager comment",
       loadingManagerCommentSave: false,
       loadingUserCommentSave: false,
       role: null,
-    }
+    };
   },
   mounted() {
-    this.role = localStorage.getItem('role')
-    this.id = '1'
-    this.fetchData()
-    this.handleComments()
+    this.role = localStorage.getItem("role");
+    this.id = "1";
+    this.fetchData();
+    this.handleComments();
   },
   watch: {
-    $route: 'fetchData',
+    $route: "fetchData",
   },
   methods: {
     async fetchData() {
       try {
-        this.loading = true
-        const { data } = await getUserById(this.id)
-        this.user = data
-        this.loading = false
+        this.loading = true;
+        const snap = await getUserById("jwaIHBqE5HYjUsgXtS7HXSAcAao1");
+        this.user = snap;
+        this.loading = false;
       } catch (error) {
-        this.loading = false
-        this.error = error
-        console.log(error)
+        this.loading = false;
+        this.error = error;
+        console.log(error);
       }
     },
     async handleProjects() {
-      this.tab = 'PROJECTS'
-      this.projects = []
-      this.error = null
-      this.loading = true
+      this.tab = "PROJECTS";
+      this.projects = [];
+      this.error = null;
+      this.loading = true;
       try {
-        const { data } = await getProjectsByUserId(this.id)
-        this.projects = data
-        this.count = data.length
-        this.loading = false
+        const snap = await getProjectsByUserId(this.id);
+        snap.forEach((doc) => {
+          this.projects.push({ ...doc.data(), id: doc.id });
+        });
+        this.loading = false;
       } catch (error) {
-        this.error = error
-        this.loading = false
-        console.log(error)
+        this.error = error;
+        this.loading = false;
+        console.log(error);
       }
     },
     async handleTodos() {
-      this.tab = 'TODOS'
-      this.projects = []
-      this.error = null
-      this.loading = true
+      this.tab = "TODOS";
+      this.projects = [];
+      this.error = null;
+      this.loading = true;
       try {
-        const { data } = await getTodosByUserId(this.id)
-        this.todos = data
-        this.count = data.length
-        this.loading = false
+        const snap = await getTodosByUserId(this.id);
+        snap.forEach((doc) => {
+          this.todos.push({ ...doc.data(), id: doc.id });
+        });
+        this.loading = false;
       } catch (error) {
-        this.error = error
-        this.loading = false
-        console.log(error)
+        this.error = error;
+        this.loading = false;
+        console.log(error);
       }
     },
     handlePerformance() {
-      this.tab = 'PERFORMANCE'
+      this.tab = "PERFORMANCE";
     },
     async handleRemove() {
-      if (confirm('Are you sure to remove the user?')) {
+      if (confirm("Are you sure to remove the user?")) {
         try {
-          this.loading = true
-          const { data } = await removeUserById(this.id)
-          this.$router.push({ path: '/users' })
-          this.loading = false
+          this.loading = true;
+          const { data } = await removeUserById(this.id);
+          this.$router.push({ path: "/users" });
+          this.loading = false;
         } catch (error) {
-          this.loading = false
-          this.error = error
-          console.log(error)
+          this.loading = false;
+          this.error = error;
+          console.log(error);
         }
-      }
-    },
-    async handleProjects() {
-      this.tab = 'PROJECTS'
-      this.projects = []
-      this.error = null
-      this.loading = true
-      try {
-        const { data } = await getProjectsByUserId(this.id)
-        this.projects = data
-        this.count = data.length
-        this.loading = false
-      } catch (error) {
-        this.error = error
-        this.loading = false
-        console.log(error)
       }
     },
     async handleComments() {
-      this.tab = 'COMMENTS'
-      this.comments = []
-      this.error = null
-      this.loading = true
+      this.tab = "COMMENTS";
+      this.comments = [];
+      this.error = null;
+      this.loading = true;
       try {
-        const { data } = await getCommentsByUserId(this.id)
-        this.comments = data
-        this.count = data.length
-        this.loading = false
-        this.manager = {
-          name: 'Aaron Andrews',
-          email: 'aaron@devoteam.com',
-          photo: 'https://randomuser.me/api/portraits/men/52.jpg',
+        const Types = {
+          OWN: "OWN",
+          BY_MANAGER: "BY_MANAGER",
+        };
+        const field = `accountId`;
+        const operator = "==";
+        const value = "jwaIHBqE5HYjUsgXtS7HXSAcAao1";
+        const snap = await getCommentsByQuery({ field, operator, value });
+        let x = null;
+        snap.forEach((doc) => {
+          const c = doc.data();
+          if (c.type === Types.OWN) {
+            this.userComment = c.message;
+          } else if (c.type === Types.BY_MANAGER) {
+            this.managerComment = c.message;
+            x = c;
+          }
+          this.comments.push({ ...doc.data(), id: doc.id });
+        });
+        console.log(x);
+        if (x) {
+          const snap = await getUserById(x.managerId);
+          this.manager = snap.data();
+          console.log(this.manager);
         }
+        this.loading = false;
       } catch (error) {
-        this.error = error
-        this.loading = false
-        console.log(error)
+        this.error = error;
+        this.loading = false;
+        console.log(error);
       }
     },
     async handleManagerComment(c) {
-      alert('Manager Comment ' + c)
-      this.loadingManagerCommentSave = true
+      alert("Manager Comment " + c);
+      this.loadingManagerCommentSave = true;
     },
     async handleUserComment(c) {
-      alert('User Comment ' + c)
-      this.loadingUserCommentSave = true
+      alert("User Comment " + c);
+      this.loadingUserCommentSave = true;
     },
   },
-}
+};
 </script>
 
 <style></style>

@@ -17,7 +17,7 @@
         <i class="fas fa-pencil"></i>
       </a>
       <span class="username">
-        <a href="#">{{ user.name }}</a>
+        <a href="#">{{ user.firstName }} {{ user.lastName }}</a>
       </span>
       <span class="description">{{ user.email }}</span>
     </div>

@@ -44,7 +44,7 @@
               </p>
             </router-link>
           </li>
-          <li class="nav-item" v-if="role === 'ROLE_ADMIN'">
+          <li class="nav-item">
             <router-link to="/users" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
@@ -52,7 +52,7 @@
               </p>
             </router-link>
           </li>
-          <li class="nav-item" v-if="role === 'ROLE_MANAGER'">
+          <li class="nav-item" >
             <router-link to="/projects" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
@@ -60,7 +60,7 @@
               </p>
             </router-link>
           </li>
-          <li class="nav-item" v-if="role === 'ROLE_MANAGER'">
+          <li class="nav-item"  >
             <router-link to="/todos" class="nav-link">
               <i class="nav-icon fa fa-check"></i>
               <p>
@@ -68,19 +68,8 @@
               </p>
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link
-              to="/comments"
-              class="nav-link"
-              v-if="role === 'ROLE_MANAGER'"
-            >
-              <i class="nav-icon fas fa-sticky-note"></i>
-              <p>
-                Comments
-              </p>
-            </router-link>
-          </li>
-          <li class="nav-item" v-if="role === 'ROLE_CONSULTANT'">
+        
+          <li class="nav-item" >
             <router-link to="/workspace" class="nav-link">
               <i class="nav-icon fas fa-sticky-note"></i>
               <p>
@@ -95,7 +84,7 @@
                 Contact
               </p>
             </router-link>
-          </li>
+          </li> 
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -67,24 +67,25 @@ export default {
     }
   },
   mounted() {
-    this.fetchData()
+    this.fetchTodos()
   },
   methods: {
-    async fetchData() {
-      this.todos = []
-      this.error = null
-      this.loading = true
-      try {
-        const { data } = await getTodos()
-        this.todos = data
-        this.count = data.length
-        this.loading = false
-      } catch (error) {
-        this.error = error
-        this.loading = false
-        console.log(error)
-      }
+     async fetchTodos() {
+      this.errorTodos = this.todos = null
+      this.loadingTodos = true
+        try {
+          const snap = await getTodos()
+          snap.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            this.todos.push(doc.id, ' => ', doc.data())
+             this.loadingTodos = false
+          })
+        } catch (error) {
+          this.loadingTodos = false
+          console.log(error)
+        }
     },
+      
   },
 
 

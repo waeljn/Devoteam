@@ -1041,13 +1041,12 @@ export default {
       this.error = null
       this.loading = true
       try {
-        const { data } = await getUsers()
-        this.users = data
-        this.count = data.length
-        this.loading = false
+       const snap = await getUsers()
+          snap.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, ' => ', doc.data())
+          })
       } catch (error) {
-        this.error = error
-        this.loading = false
         console.log(error)
       }
     },
