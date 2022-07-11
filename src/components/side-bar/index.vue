@@ -24,7 +24,9 @@
           />
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ email }}</a>
+           <router-link to="/" >
+          <a  class="d-block">{{ email }}</a>
+           </router-link>
         </div>
       </div>
 
