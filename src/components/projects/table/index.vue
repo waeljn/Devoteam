@@ -23,7 +23,7 @@
               </ul>
             </td>
             <td class="project-state text-center">
-              {{ row.leaderId }}
+              {{ row.leaderId}}
             </td>
             <td class="project-state text-center">
               {{ row.createdAt }}

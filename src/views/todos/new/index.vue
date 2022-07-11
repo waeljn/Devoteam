@@ -27,7 +27,7 @@
     <!-- /.content-header -->
     <section class="content">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="card card-secondary">
             <div class="card-header">
               <h3 class="card-title">Team</h3>
@@ -42,7 +42,7 @@
                 </button>
               </div>
             </div>
-            <div class="card-body">
+            <div class="card-body  md-3">
               <div class="form-group">
                 <label for="inputDescription">Team select</label>
                 <users-table

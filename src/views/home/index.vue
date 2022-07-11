@@ -150,7 +150,7 @@
         <div class="col-lg-6">
           <div class="card">
             <div class="card-header border-0">
-              <h3 class="card-title">Products</h3>
+              <h3 class="card-title">Projects</h3>
               <div class="card-tools">
                 <a href="#" class="btn btn-tool btn-sm">
                   <i class="fas fa-download"></i>
@@ -164,10 +164,8 @@
               <table class="table table-striped table-valign-middle">
                 <thead>
                   <tr>
-                    <th>Attachement</th>
-                    <th>Title</th>
-                    <th>User ID</th>
-                    <th>More</th>
+                    <th>Our Projects</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -260,30 +258,21 @@
                 <li class="nav-item">
                   <div class="nav-link">
                     Performance today
-                    <span class="float-right text-danger">
-                      <i class="fas fa-arrow-down text-sm"></i>
-                      12%
-                    </span>
+                    
                   </div>
                 </li>
                 <li class="nav-item">
                   <div class="nav-link">
                     Performance yesterday
-                    <span class="float-right text-success">
-                      <i class="fas fa-arrow-up text-sm"></i>
-                      4%
-                    </span>
+                   
                   </div>
                 </li>
                 <li class="nav-item">
                   <div class="nav-link">
                     Performance in ({{
                       new Date(new Date().getDay() - 2).toDateString()
-                    }})
-                    <span class="float-right text-success">
-                      <i class="fas fa-arrow-up text-sm"></i>
-                      8%
-                    </span>
+                    }}) 
+                  
                   </div>
                 </li>
               </ul>
@@ -977,10 +966,12 @@
         </div>
       </div>
     </section>
-    <button @click="handleTestProjects">Test Projects</button>
+  <!--  
+     <button @click="handleTestProjects">Test Projects</button>
     <button @click="handleTestComments">Test Comments</button>
     <button @click="handleTestTodos">Test Todos</button>
     <button @click="handleTestUsers">Test Users</button>
+    -->
   </div>
 </template>
 
@@ -1036,7 +1027,7 @@ export default {
     this.fetchComments()
   },
   methods: {
-    async fetchUsers() {
+   /* async fetchUsers() {
       this.users = []
       this.error = null
       this.loading = true
@@ -1049,11 +1040,12 @@ export default {
       } catch (error) {
         console.log(error)
       }
-    },
+    },*/
     async fetchProjects() {
       this.projects = []
       this.error = null
       this.loading = true
+      
       try {
         const { data } = await getProjects()
         this.projects = data
@@ -1064,7 +1056,7 @@ export default {
         this.loading = false
         console.log(error)
       }
-    },
+    },/*
     async fetchTodos() {
       this.todos = []
       this.error = null
@@ -1463,7 +1455,7 @@ export default {
       // fn4()
       // fn5()
       // fn6()
-    },
+    },*/
   },
 }
 </script>
