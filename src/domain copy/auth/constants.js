@@ -13,10 +13,15 @@ export const CONSULTANTS = [
   {
     email: "manager@devoteam.com",
     password: "manager123",
-    role: Roles.MANGER,
+    role: Roles.MANAGER,
   },
   {
     email: "user@devoteam.com",
+    password: "user123",
+    role: Roles.USER,
+  },
+  {
+    email: "jendoubiwael99@gmail.com",
     password: "user123",
     role: Roles.USER,
   },

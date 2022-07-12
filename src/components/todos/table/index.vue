@@ -17,6 +17,11 @@
               <i class="fa fa-times text-danger"></i>
             </td>
             <td>
+             
+                 Incompleted
+              
+            </td>
+                 <td>
               <router-link :to="'/users/' + row.userId">
                 <a href="#">View User ({{ row.userId }})</a>
               </router-link>

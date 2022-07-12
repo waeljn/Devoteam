@@ -1087,11 +1087,9 @@ export default {
         this.loading = false
         console.log(error)
       }
-    },
+    },*/
     async showPieChart() {
-      const completed = this.todos.filter((t) => t.completed === true)
-      const incompleted = this.todos.filter((t) => t.completed === false)
-      const pieChartCanvas = this.$refs['pieChart'].getContext('2d')
+  
       const pieData = {
         labels: ['Incompleted', 'Completed'],
         datasets: [
@@ -1111,7 +1109,7 @@ export default {
         data: pieData,
         options: pieOptions,
       })
-    },
+    },/*
     handleTestProjects() {
       const fn1 = async () => {
         try {

@@ -41,7 +41,9 @@ const getRole = async () => {
   if (docSnap.exists()) {
     role = docSnap.data().role;
   }
+
   return role;
+ 
 };
 
 const changePassword = async ({ newPassword }) => {

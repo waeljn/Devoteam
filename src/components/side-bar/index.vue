@@ -46,7 +46,7 @@
               </p>
             </router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" >
             <router-link to="/users" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
@@ -54,7 +54,7 @@
               </p>
             </router-link>
           </li>
-          <li class="nav-item" >
+          <li class="nav-item">
             <router-link to="/projects" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
@@ -62,14 +62,7 @@
               </p>
             </router-link>
           </li>
-          <li class="nav-item"  >
-            <router-link to="/todos" class="nav-link">
-              <i class="nav-icon fa fa-check"></i>
-              <p>
-                Todos
-              </p>
-            </router-link>
-          </li>
+        
         
           <li class="nav-item" >
             <router-link to="/workspace" class="nav-link">

@@ -83,6 +83,14 @@
                   </div>
                 </div>
                 <div class="card-body">
+                  <label for="inputDescription">Title </label>
+                  <input
+                    type="text"
+                    id="inputTitle"
+                    class="form-control"
+                    v-model="title"
+                    required
+                  />
                   <div class="form-group">
                     <label for="inputDescription">Todo Description</label>
                     <textarea
@@ -92,13 +100,9 @@
                     ></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="inputStatus">Status</label>
-                    <select id="inputStatus" class="form-control custom-select">
-                      <option selected="" disabled="">Select one</option>
-                      <option>On Hold</option>
-                      <option>Canceled</option>
-                      <option>Success</option>
-                    </select>
+                    
+                    
+                      
                   </div>
                   <button @click="handleCreate" class="btn btn-primary">
                     Create
