@@ -201,8 +201,8 @@ export default {
     async fetchUser() {
      const fn2 = async () => {
         try {
-          const snap = await getUserById()
-          snap.forEach((doc) => {
+          const snap = await getUserById(this.id)
+          
             this.username = snap.data().username
           this.firstName = snap.data().firstName
           this.email = snap.data().email
@@ -210,8 +210,8 @@ export default {
           this.address = snap.data().address
           this.lastName = snap.data().lastName
           this.phone = snap.data().phone
-            console.log(doc.id, ' => ', doc.data())
-          })
+           // console.log(doc.id, ' => ', doc.data())
+          
         } catch (error) {
           console.log(error)
         }
