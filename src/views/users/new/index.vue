@@ -152,6 +152,14 @@ export default {
       loading: false,
       error: null,
       roles,
+        username: '',
+      firstName: '',
+      lastName: '',
+      address: '',
+      email: '',
+      phone: '',
+      birthDate: '',
+      organization: '',
       passwordHidden: true,
       user: null, // TODO Remove this
       ranks,
@@ -188,6 +196,14 @@ export default {
           email: user.email,
           role: this.role,
           rank: this.rank,
+          username: this.username,
+          firstName: this.firstName,
+          lastName: this.lastName,
+          address: this.address,
+          email: this.email,
+          phone: this.phone,
+          birthDate: this.birthDate,
+          organization: this.organization,
         })
         this.loading = false
         this.$router.push({ path: '/users/' })

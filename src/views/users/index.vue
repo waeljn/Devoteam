@@ -29,7 +29,7 @@
     <!-- Main content -->
     <section class="content">
       <users-table
-        v-if="users && users.length > 0"
+        v-if="users && users.length "
         :records="users"
       ></users-table>
       <div class="card" v-if="loading">

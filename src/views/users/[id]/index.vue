@@ -29,29 +29,29 @@
         :user="user"
         v-if="user"
         @projects="handleProjects"
-        @todos="handleTodos"
+        @todos="handleTodos" 
         @remove="handleRemove"
         @performance="handlePerformance"
         @comments="handleComments"
       ></user-details>
       <div class="col-md-8 mx-auto">
         <projects-table
-          v-if="tab === 'PROJECTS' && projects && projects.length > 0"
+          v-if=" tab=== 'projects' && projects && projects.length > 0 "
           :records="projects"
         ></projects-table>
       </div>
-      <div class="col-md-8 mx-auto">
+      <!-- <div class="col-md-8 mx-auto">
         <todos-table
           v-if="tab === 'TODOS' && todos && todos.length > 0"
           :records="todos"
         ></todos-table>
-      </div>
+      </div> -->
       <div class="col-md-8 mx-auto">
         <user-performance-table
           v-if="tab === 'PERFORMANCE'"
         ></user-performance-table>
       </div>
-      <div
+      <!--  <div
         class="col-md-8 mx-auto"
         v-if="tab === 'COMMENTS' && manager && user"
       >
@@ -74,7 +74,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="card" v-if="error">
         <div class="card-body text-danger">{{ error }}</div>
       </div>
@@ -124,8 +124,8 @@ export default {
       projects: [],
       todos: [],
       tab: null,
-      // userComment: null, rajja3ha
-      // managerComment: null, rajja3ha
+      //userComment: null
+      // managerComment: null, 
       userComment: 'Test user comment',
       managerComment: 'Test manager comment',
       loadingManagerCommentSave: false,
@@ -135,7 +135,11 @@ export default {
   mounted() {
     this.id = this.$route?.params?.id
     this.fetchData()
-    this.handleComments()
+   // this.handleComments()
+    this.handleProjects()
+   // this.handleTodos()
+    this.handlePerformance()
+   // this.handleRemove()
   },
   watch: {
     $route: 'fetchData',
@@ -153,21 +157,24 @@ export default {
         console.log(error)
       }
     },
-    async handleProjects() {
+   async handleProjects() {
       this.tab = 'PROJECTS'
-      this.projects = []
+     this.projects = []
       this.error = null
       this.loading = true
       try {
-        const { data } = await getProjectsByUserId(this.id)
-        this.projects = data
-        this.count = data.length
+        const snap = await getProjectsByUserId()
+        snap.forEach((doc) => {
+          this.projects.push({ ...doc.data(), id: doc.id })
+        })
+        console.info(this.projects) // Todo Comment this
         this.loading = false
       } catch (error) {
         this.error = error
         this.loading = false
         console.log(error)
       }
+    },/* 
     },
     async handleTodos() {
       this.tab = 'TODOS'
@@ -184,24 +191,24 @@ export default {
         this.loading = false
         console.log(error)
       }
-    },
+    },*/
     handlePerformance() {
       this.tab = 'PERFORMANCE'
     },
-    async handleRemove() {
+      async handleRemove() {
       if (confirm('Are you sure to remove the user?')) {
         try {
-          this.loading = true
-          const { data } = await removeUserById(this.id)
+          this.loadingRemove = true
+          const response = await removeUserById(this.id)
           this.$router.push({ path: '/users' })
-          this.loading = false
+          this.loadingRemove = false
         } catch (error) {
-          this.loading = false
-          this.error = error
+          this.loadingRemove = false
+          this.errorRemove = error
           console.log(error)
         }
       }
-    },
+    },/*
     async handleProjects() {
       this.tab = 'PROJECTS'
       this.projects = []
@@ -246,7 +253,7 @@ export default {
     async handleUserComment(c) {
       alert('User Comment ' + c)
       this.loadingUserCommentSave = true
-    },
+    },*/
   },
 }
 </script>

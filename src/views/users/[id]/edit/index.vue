@@ -33,91 +33,117 @@
         <div class="col-md-6 mx-auto">
           <div class="card">
             <div class="card-body">
-              <form @submit="handleCreate">
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Name</label>
-                  <input
-                    v-model="name"
-                    type="text"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="Joe Doe"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Email</label>
-                  <input
-                    v-model="email"
-                    type="email"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="joe.doe@gmail.com"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Sex</label>
-                  <br />
-                  <input
-                    type="radio"
-                    id="female"
-                    value="female"
-                    v-model="sex"
-                  />
-                  <label for="female">Woman</label>
-                  <input
-                    type="radio"
-                    id="male"
-                    value="male"
-                    v-model="sex"
-                    class="mx-2"
-                  />
-                  <label for="male">Man</label>
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Phone</label>
-                  <input
-                    v-model="phone"
-                    type="text"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="+123 45678900"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">
-                    Todo
-                    <div
-                      v-show="loadingTodos"
-                      class="spinner-border spinner-border-sm text-secondary mr-2"
-                      role="status"
-                    >
-                      <span class="sr-only">Loading...</span>
+              <form @submit="handleUpdate">
+                
+                  <!-- Form Group (username)-->
+                  <!-- Form Row-->
+                  <div class="row gx-3 mb-3">
+                    <!-- Form Group (first name)-->
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputUsername">
+                        Username
+                      </label>
+                      <input
+                        v-model="username"
+                        class="form-control"
+                        id="inputUsername"
+                        type="text"
+                        placeholder="Enter your username"
+                      />
                     </div>
-                  </label>
-                  <select
-                    v-model="todo"
-                    class="form-control"
-                    id="exampleFormControlSelect1"
-                    :disabled="!todos"
-                  >
-                    <option :key="t.id" :value="t.id" v-for="t in todos">
-                      {{ t.title }}
-                    </option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlTextarea1">
-                    Description
-                  </label>
-                  <textarea
-                    v-model="description"
-                    class="form-control"
-                    id="exampleFormControlTextarea1"
-                    rows="3"
-                    placeholder="About the user"
-                  ></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                    <!-- Form Group (last name)-->
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputEmail">
+                        Email
+                      </label>
+                      <input
+                        v-model="email"
+                        class="form-control"
+                        id="inputEmail"
+                        type="text"
+                        placeholder="Enter your email"
+                      />
+                    </div>
+                  </div>
+                  <div class="row gx-3 mb-3">
+                    <!-- Form Group (first name)-->
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputFirstName">
+                        First name
+                      </label>
+                      <input
+                        v-model="firstName"
+                        class="form-control"
+                        id="inputFirstName"
+                        type="text"
+                        placeholder="Enter your first name"
+                      />
+                    </div>
+                    <!-- Form Group (last name)-->
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputLastName">
+                        Last name
+                      </label>
+                      <input
+                        v-model="lastName"
+                        class="form-control"
+                        id="inputLastName"
+                        type="text"
+                        placeholder="Enter your last name"
+                      />
+                    </div>
+                  </div>
+                  <!-- Form Row-->
+                  <div class="row gx-3 mb-3">
+                    <!-- Form Group (phone number)-->
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputPhone">
+                        Phone number
+                      </label>
+                      <input
+                        v-model="phone"
+                        class="form-control"
+                        id="inputPhone"
+                        type="tel"
+                        placeholder="Enter your phone number"
+                        value="555-123-4567"
+                      />
+                    </div>
+                    <!-- Form Group (birthDate)-->
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputBirthDate">
+                        Birth date
+                      </label>
+                      <input
+                        v-model="birthDate"
+                        class="form-control"
+                        id="inputBirthDate"
+                        type="date"
+                        name="birthDate"
+                        placeholder="Enter your birthDate"
+                        value="06/10/1988"
+                      />
+                    </div>
+                  </div>
+                  <!-- Form Row        -->
+                  <div class="row gx-3 mb-3">
+                    <!-- Form Group (address)-->
+                    <div class="col-md-12">
+                      <label class="small mb-1" for="inputAddress">
+                        Address
+                      </label>
+                      <textarea
+                        v-model="address"
+                        class="form-control"
+                        id="inputAddress"
+                        type="text"
+                        placeholder="Enter your address"
+                        value="San Francisco, CA"
+                      ></textarea>
+                    </div>
+                  </div>
+                  <!-- Save changes button-->
+                   <button type="submit" class="btn btn-primary">Update</button>
               </form>
             </div>
           </div>
@@ -145,81 +171,71 @@
 </template>
 
 <script>
-import { getTodos } from '../../../../domain/todos'
+
 import { getUserById, updateUserById } from '../../../../domain/users'
 export default {
   data() {
     return {
       id: null,
-      sex: 'female',
-      name: null,
+      username: null,
       email: null,
+      firstName: null,
+      lastName: null,
       phone: null,
-      todo: null,
-      description: null,
+      birthDate: null,
+      address : null,
       loading: false,
       error: null,
-      loadingTodos: false,
-      todos: null,
-      errorTodos: null,
+     
+     
       user: null, // TODO Remove this
     }
   },
   mounted() {
     this.id = this.$route?.params?.id
     console.log(this.id)
-    this.fetchTodos()
+  
     this.fetchUser()
   },
   methods: {
     async fetchUser() {
-      this.error = this.user = null
-      this.loading = true
-      try {
-        const { data } = await getUserById(this.id)
-        console.log(data)
-        this.name = data.name
-        this.email = data.email
-        this.phone = data.phone
-        this.description = data.description
-        // this.todo = data.todo THIS IS THE CORRECT ONE
-        this.todo = data.id
-        this.loading = false
-      } catch (error) {
-        this.error = error
-        this.loading = false
-        console.log(error)
+     const fn2 = async () => {
+        try {
+          const snap = await getUserById()
+          snap.forEach((doc) => {
+            this.username = snap.data().username
+          this.firstName = snap.data().firstName
+          this.email = snap.data().email
+          this.birthDate = snap.data().birthDate
+          this.address = snap.data().address
+          this.lastName = snap.data().lastName
+          this.phone = snap.data().phone
+            console.log(doc.id, ' => ', doc.data())
+          })
+        } catch (error) {
+          console.log(error)
+        }
       }
+      fn2()
     },
-    async fetchTodos() {
-      this.errorTodos = this.todos = null
-      this.loadingTodos = true
-      try {
-        const { data } = await getTodos()
-        this.todos = data
-        this.loadingTodos = false
-      } catch (error) {
-        this.errorTodos = error
-        this.loadingTodos = false
-        console.log(error)
-      }
-    },
-    async handleCreate($e) {
+   
+    async handleUpdate($e) {
       $e.preventDefault()
       try {
         let u = {
-          name: this.name,
-          sex: this.sex,
+          username: this.username,
+          firstName: this.firstName,
           email: this.email,
           phone: this.phone,
-          description: this.description,
-          todo: this.todo,
+          lastName: this.lastName,
+          birthDate: this.birthDate,
+          address : this.address
         }
         this.loading = true
         this.user = await updateUserById(this.id, u)
         console.log(u)
         this.loading = false
-        // this.$router.push({ path: '/users/' })
+         this.$router.push({ path: '/users/' })
       } catch (error) {
         this.loading = false
         this.error = false

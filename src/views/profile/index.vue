@@ -242,7 +242,7 @@ export default {
             organization: this.organization,
           }
           console.log(profile)
-          const { uid } = getUser()
+         const { uid } = getUser()
           const { data } = await updateUserById(uid, profile)
         } catch (error) {
           console.log(error)

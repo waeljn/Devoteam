@@ -45,7 +45,7 @@
         <img
           class="img-circle"
           :src="
-            'https://randomuser.me/api/portraits/med/men/' + user.id + '.jpg'
+            'https://randomuser.me/api/portraits/med/men/5.jpg'
           "
           alt="User Avatar"
         />
@@ -55,20 +55,20 @@
           <div class="col-sm-4 border-right">
             <div class="description-block">
               <h5 class="description-header">Username</h5>
-              <span class="description-text">{{ user.username }}</span>
+              <span class="description-text">{{ firstName }}</span>
             </div>
           </div>
           <div class="col-sm-4 border-right">
             <div class="description-block">
               <h5 class="description-header">Email</h5>
-              <span class="description-text">{{ user.email }}</span>
+              <span class="description-text">{{ email }}</span>
             </div>
           </div>
 
           <div class="col-sm-4">
             <div class="description-block">
               <h5 class="description-header">Phone</h5>
-              <span class="description-text">{{ user.phone }}</span>
+              <span class="description-text">{{ phone }}</span>
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@
               <span class="float-right badge bg-info">5</span>
             </a>
           </li>
-          <li class="nav-item" @click="$emit('performance')" v-if="role === 'ROLE_ADMIN'">
+          <li class="nav-item" @click="$emit('performance')" >
             <a class="nav-link with-pointer">
               Calculate performance
             </a>
