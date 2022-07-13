@@ -200,6 +200,7 @@ export default {
           this.description = null
           this.leaderId = null
           this.company = null
+          this.$router.push({ path: '/projects/' })
           Toaster.show('Project created')
           this.loadingCreate = false
         } catch (error) {

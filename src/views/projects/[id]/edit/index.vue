@@ -184,7 +184,8 @@ export default {
         const project = await updateProjectById(this.id, payload)
         this.loadingUpdate = false
         this.fetchProject()
-        // this.$router.push({ path: '/projects/' })
+        this.$router.push({ path: '/projects/' })
+        Toaster.show('Project Updated')
       } catch (error) {
         this.loadingUpdate = false
         this.errorUpdate = error

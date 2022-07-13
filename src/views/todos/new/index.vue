@@ -218,7 +218,7 @@ export default {
         this.user = data
         console.log(u)
         this.loading = false
-        // this.$router.push({ path: '/projects/' })
+         this.$router.push({ path: '/projects/' })
         Toaster.show('Todo created')
       } catch (error) {
         this.loading = false

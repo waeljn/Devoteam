@@ -20,14 +20,14 @@
               <div class="card-body text-center">
                 <!-- Profile picture image-->
                 <img
-                  v-if="organization"
+                  v-if="avatar"
                   class="img-account-profile rounded-circle mb-2"
-                  :src="organization"
+                  :src="avatar"
                   alt=""
                 />
                 <img
                   class="img-account-profile rounded-circle mb-2"
-                  v-if="!organization"
+                  v-if="!avatar"
                   src="/img/user.png"
                   alt=""
                 />
@@ -212,14 +212,14 @@ export default {
   data() {
     return {
       profile: null,
-      username: '',
-      firstName: '',
-      lastName: '',
-      address: '',
-      email: '',
-      phone: '',
-      birthDate: '',
-      organization: '',
+      username: null,
+      firstName: null,
+      lastName: null,
+      address: null,
+      email: null,
+      phone: null,
+      birthDate: null,
+      avatar: null,
       loading: false,
       loadingUpload: false,
     }
@@ -239,7 +239,7 @@ export default {
             email: this.email,
             phone: this.phone,
             birthDate: this.birthDate,
-            organization: this.organization,
+            avatar: this.avatar,
           }
           console.log(profile)
          const { uid } = getUser()
@@ -310,7 +310,7 @@ export default {
           // Handle successful uploads on complete
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            this.organization = downloadURL
+            this.avatar = downloadURL
             this.loadingUpload = false
           })
         },
@@ -322,18 +322,19 @@ export default {
     handleGetUser() {
       const fetch = async () => {
         try {
-          // const { data } = await getUsers()
-          const data = {
-            address: '6 Fes St',
-            birthDate: '2021-06-29',
-            email: 'foo.bar@devoteama',
-            firstName: 'Foo',
-            lastName: 'Bar',
-            organization:
-              'https://firebasestorage.googleapis.com/v0/b/devoteam-dev.appspot.com/o/avatars%2F7G7Yg3UjESUtBLq9WfRd7VbX.jpg?alt=media&token=f287944d-0656-4c45-aa6c-717b9628b632',
-            phone: '12345678',
-            username: 'foobar',
-          }
+           const { data } = await getUsers()
+           console.log(data)
+          /*const data = {
+            address: this.address,
+            birthDate: this.birthDate,
+            email: this.email,
+            firstName:  this.firstName,
+            lastName: this.lastName,
+            avatar:
+               this.avatar,
+            phone: this.phone,
+            username: this.username,
+          }*/
           this.profile = data
           this.username = data.username
           this.email = data.email
@@ -342,7 +343,7 @@ export default {
           this.phone = data.phone
           this.birthDate = data.birthDate
           this.address = data.address
-          this.organization = data.organization
+          this.avatar = data.avatar
         } catch (error) {
           console.error(error)
         }

@@ -233,9 +233,10 @@ export default {
         }
         this.loading = true
         this.user = await updateUserById(this.id, u)
-        console.log(u)
         this.loading = false
          this.$router.push({ path: '/users/' })
+         Toaster.show('User Updated')
+         
       } catch (error) {
         this.loading = false
         this.error = false
