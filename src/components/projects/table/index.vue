@@ -62,6 +62,7 @@
                 <a class="btn btn-sm btn-info"><i class="fa fa-add"></i></a>
               </router-link>
             </td>
+           
           </tr>
         </template>
       </datatable>
@@ -84,9 +85,11 @@ export default {
         { label: 'Project Name', field: 'title' },
         { label: 'Client Company', field: 'body' },
         { label: 'Project Leader', field: 'leaderId' },
+        
         { label: 'Created At', field: 'createdAt' },
         { label: 'Status', field: 'status' },
         { label: 'Actions' },
+          
       ],
       rows: this.records,
     }

@@ -211,6 +211,7 @@ import { getUser } from '../../domain/auth'
 export default {
   data() {
     return {
+      id : null,
       profile: null,
       username: null,
       firstName: null,
@@ -225,6 +226,8 @@ export default {
     }
   },
   mounted() {
+    this.id = this.$route?.params?.id
+    console.log(this.id)
     this.handleGetUser()
   },
   methods: {
@@ -246,7 +249,7 @@ export default {
           const { data } = await updateUserById(uid, profile)
         } catch (error) {
           console.log(error)
-          alert('An error happened!')
+         // alert('An error happened!')
         }
       }
       fn()
@@ -322,30 +325,20 @@ export default {
     handleGetUser() {
       const fetch = async () => {
         try {
-           const { data } = await getUsers()
-           console.log(data)
-          /*const data = {
-            address: this.address,
-            birthDate: this.birthDate,
-            email: this.email,
-            firstName:  this.firstName,
-            lastName: this.lastName,
-            avatar:
-               this.avatar,
-            phone: this.phone,
-            username: this.username,
-          }*/
-          this.profile = data
-          this.username = data.username
-          this.email = data.email
-          this.firstName = data.firstName
-          this.lastName = data.lastName
-          this.phone = data.phone
-          this.birthDate = data.birthDate
-          this.address = data.address
-          this.avatar = data.avatar
+          const snap = await getUserById("pZQJkP3dpKZ4YZeAeexx2aBo8Fp1")
+          
+            this.username = snap.data().username
+          this.firstName = snap.data().firstName
+          this.email = snap.data().email
+          this.birthDate = snap.data().birthDate
+          this.address = snap.data().address
+          this.lastName = snap.data().lastName
+          this.phone = snap.data().phone
+          this.avatar=snap.data().avatar
+            console.log(doc.id, ' => ', doc.data())
+          
         } catch (error) {
-          console.error(error)
+          console.log(error)
         }
       }
       fetch()

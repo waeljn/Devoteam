@@ -217,8 +217,8 @@ export default {
     handleUserAssignement($e) {
       $('#users-table-modal').modal('hide')
       this.leader = $e
-      console.log(this.leader)
-      this.leaderId = this.leader.id
+      console.log(this.leader.username)
+      this.leaderId = this.leader.username
     },
   },
 }

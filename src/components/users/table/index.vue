@@ -13,7 +13,12 @@
                 {{ row.id }}
               </router-link>
             </td>
-            <td>{{ row.firstName }}</td>
+            <td>
+              <a>
+                {{ row.username }}
+              </a>
+              <br />
+            </td>
             <td>{{ row.email }}</td>
             <td>{{ row.phone }}</td>
             <td>
