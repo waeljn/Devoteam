@@ -129,7 +129,7 @@
                 <li :key="u.id" v-for="u in users.slice(4)">
                   <img
                     :src="
-                      'https://randomuser.me/api/portraits/men/' + u.id + '.jpg'
+                      'https://randomuser.me/api/portraits/men/22.jpg'
                     "
                     alt="User Image"
                   />
@@ -1027,7 +1027,7 @@ export default {
     this.fetchComments()
   },
   methods: {
-   /* async fetchUsers() {
+async fetchUsers() {
       this.users = []
       this.error = null
       this.loading = true
@@ -1035,31 +1035,56 @@ export default {
        const snap = await getUsers()
           snap.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, ' => ', doc.data())
+            this.users.push(doc.id, ' => ', doc.data())
+            this.loading = false
           })
       } catch (error) {
+          this.error = error
+        this.loading = false
         console.log(error)
+        
       }
-    },*/
+    },
     async fetchProjects() {
       this.projects = []
       this.error = null
       this.loading = true
-      
       try {
-        const { data } = await getProjects()
-        this.projects = data
-        this.count = data.length
+        const snap = await getProjects()
+        snap.forEach((doc) => {
+          this.projects.push({ ...doc.data(), id: doc.id })
+        })
+        
+        console.info(this.projects) // Todo Comment this
         this.loading = false
       } catch (error) {
         this.error = error
         this.loading = false
         console.log(error)
       }
+    },
+    async fetchTodos() {
+      this.errorTodos = this.todos = null
+       this.todos = []
+      this.error = null
+      this.loadingTodos = true
+        try {
+          const snap = await getTodos()
+          snap.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            this.todos.push(doc.id, ' => ', doc.data())
+             this.loadingTodos = false
+             
+             this.count = data.length
+             
+          })
+        } catch (error) {
+          this.loadingTodos = false
+          console.log(error)
+        }
     },/*
     async fetchTodos() {
-      this.todos = []
-      this.error = null
+     
       this.loading = true
       try {
         const { data } = await getTodos()
