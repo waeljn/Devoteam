@@ -96,6 +96,7 @@
                     <textarea
                       id="inputDescription"
                       class="form-control"
+                      v-model="description"
                       rows="4"
                     ></textarea>
                   </div>
@@ -148,12 +149,10 @@ export default {
   },
   data() {
     return {
-      sex: 'female',
-      name: null,
-      email: null,
-      phone: null,
-      todo: null,
+      
+      title: null,
       description: null,
+      team : null,
       loading: false,
       error: null,
       loadingTodos: false,
@@ -204,12 +203,10 @@ export default {
       $e.preventDefault()
       try {
         let u = {
-          name: this.name,
-          sex: this.sex,
-          email: this.email,
-          phone: this.phone,
+          title: this.title,
+          
           description: this.description,
-          todo: this.todo,
+          team:  this.selectedUsers.map(({ username }) => username),
         }
         const ids = this.selectedUsers.map(({ id }) => id)
         console.log(ids)

@@ -17,25 +17,41 @@
               <i class="fa fa-times text-danger"></i>
             </td>
             <td>
-             
-                 Incompleted
+              {{row.description}}
+               
               
             </td>
                  <td>
-              <router-link :to="'/users/' + row.userId">
-                <a href="#">View User ({{ row.userId }})</a>
-              </router-link>
+              {{row.team}}
             </td>
             <td>
-              <router-link :to="'/todos/' + row.id ">
-                <a class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
-              </router-link>
-              <router-link :to="'/todos/' + row.id + '/edit'">
-                <a class="btn btn-sm btn-warning ml-1">
-                  <i class="fa fa-pen text-white"></i>
-                </a>
-              </router-link>
-            </td>
+              
+               <router-link
+            v-if="row.id"
+            :to="'/todos/' + row.id + '/edit'"
+          >
+            <a
+              type="button"
+              class="btn btn-tool"
+              title="Edit"
+              data-widget="chat-pane-toggle"
+              @click="$emit('update')"
+            >
+              <i class="fas fa-pencil"></i>
+            </a>
+          </router-link>
+<button
+            type="button"
+            class="btn btn-tool"
+            data-card-widget="remove"
+            title="Remove"
+            v-show="!loading"
+            @click="$emit('remove')"
+          >
+            <i class="fas fa-trash"></i>
+          </button>
+              
+            </td> 
           </tr>
         </template>
       </datatable>
@@ -56,8 +72,8 @@ export default {
       columns: [
         { label: 'ID', field: 'id' },
         { label: 'Title', field: 'title' },
-        { label: 'Completed', field: 'email' },
-        { label: 'User', field: 'userId' },
+        { label: 'Description', field: 'description' },
+        { label: 'Team', field: 'userId' },
         { label: 'Actions' },
       ],
       rows: this.records,
