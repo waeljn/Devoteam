@@ -25,7 +25,22 @@
               {{row.team}}
             </td>
             <td>
-              
+              <router-link   v-if="row.id"
+            :to="'/todos/' + row.id ">
+            <a
+            type="button"
+            class="btn btn-tool"
+            data-card-widget="remove"
+            title="Remove"
+            v-show="!loading"
+            @click="$emit('remove')"
+          >
+            <i class="fas fa-eye"></i>
+            </a>
+</router-link>
+
+
+
                <router-link
             v-if="row.id"
             :to="'/todos/' + row.id + '/edit'"
@@ -40,16 +55,7 @@
               <i class="fas fa-pencil"></i>
             </a>
           </router-link>
-<button
-            type="button"
-            class="btn btn-tool"
-            data-card-widget="remove"
-            title="Remove"
-            v-show="!loading"
-            @click="$emit('remove')"
-          >
-            <i class="fas fa-trash"></i>
-          </button>
+
               
             </td> 
           </tr>

@@ -41,9 +41,7 @@
         v-if="todos"
         @remove="handleRemove"
       ></todos-details>
-      <div class="card" v-if="todos">
-        <pre class="card-body">{{ JSON.stringify(todos, null, 2) }}</pre>
-      </div>
+      
       <div class="card" v-if="error">
         <div class="card-body text-danger">{{ error }}</div>
       </div>
@@ -53,10 +51,12 @@
 
 <script>
 import todosDetails from '../../../components/todos/details'
-import { removeTodosById, getTodosById } from '../../../domain/todos'
+import { removeTodoById, getTodoById } from '../../../domain/todos'
 export default {
   components: {
     todosDetails,
+    getTodoById,
+    removeTodoById
   },
   data() {
     return {
@@ -74,11 +74,12 @@ export default {
     $route: 'fetchData',
   },
   methods: {
-    async fetchData() {
+      async fetchData() {
       try {
         this.loading = true
-        const { data } = await getTodosById(this.id)
-        this.todos = data
+        const snap = await getTodoById(this.id)
+        this.todos = { ...snap.data(), id: this.id }
+        console.info(this.todos) // Todo Comment this
         this.loading = false
       } catch (error) {
         this.loading = false
@@ -86,16 +87,16 @@ export default {
         console.log(error)
       }
     },
-    async handleRemove() {
-      if (confirm('Are you sure to remove the Task?')) {
+     async handleRemove() {
+      if (confirm('Are you sure to remove this Task?')) {
         try {
-          this.loading = true
-          const { data } = await removeTodosById(this.id)
-          this.$router.push({ path: '/projects' })
-          this.loading = false
+          this.loadingRemove = true
+          const response = await removeTodoById(this.id)
+          this.$router.push({ path: '/projects/'  })
+          
         } catch (error) {
-          this.loading = false
-          this.error = error
+         
+          this.errorRemove = error
           console.log(error)
         }
       }

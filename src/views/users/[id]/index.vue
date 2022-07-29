@@ -103,8 +103,7 @@ import UserCommentsDetails from '../../../components/comments/details'
 import TodosTable from '../../../components/todos/table'
 import { removeUserById, getUserById } from '../../../domain/users'
 import { getProjectsByUserId } from '../../../domain/projects'
-import { getTodosByUserId } from '../../../domain/todos'
-import { getCommentsByUserId } from '../../../domain/comments'
+
 export default {
   components: {
     UserDetails,
